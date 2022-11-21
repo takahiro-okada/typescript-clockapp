@@ -15,6 +15,9 @@ function App() {
         <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
           Updated By Oka
         </a>
+        <button type="button" className="px-6 py-2 bg-green-300">
+          OK
+        </button>
       </header>
     </div>
   );
