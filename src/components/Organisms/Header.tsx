@@ -1,11 +1,54 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import PREFECTURE_CITY_DATA from '../../data.json';
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const [openPlace, setOpenPlace] = useState(false);
+
   const menuFunction = () => {
     setOpenMenu(!openMenu);
   };
+  const handleOpenPlace = () => {
+    setOpenPlace(!openPlace);
+  };
+  const handlePrefectureOpen = (prefectureObject: any, e: any) => {
+    // setOpenPrefecture((prevState) => ({
+    //   ...prevState,
+    console.log(prefectureObject);
+    console.log(e.currentTarget.getAttribute('data-id'));
+    //   [index]: !prevState,
+    // }));
+  };
+
+  const prefectureList = PREFECTURE_CITY_DATA.map((prefectureObject, index) => {
+    const prefectureName = prefectureObject.name;
+    const cityInfoObj = prefectureObject.city;
+    const city = cityInfoObj.map((cityInfo) => {
+      const cityName = cityInfo.city;
+      return (
+        <li className="px-1 py-1 inline-block bg-yellow-200 mx-1 my-1 rounded-lg">
+          {cityName}
+          (2)
+        </li>
+      );
+    });
+
+    return (
+      <>
+        <button
+          type="button"
+          onClick={(e) => handlePrefectureOpen(prefectureObject, e)}
+          className="block"
+          data-id={index}
+        >
+          {prefectureName}
+        </button>
+        <ul className="ml-5">{city}</ul>
+      </>
+    );
+  });
+
   return (
     <header className="bg-orange-600 px-3 py-3 text-2xl bg-gradient-to-r from-[#FFB347] to-[#FFCC33]">
       <div className="container mx-auto flex justify-between ">
@@ -15,7 +58,7 @@ const Header = () => {
           <div className="w-8 h-0.5 bg-gray-600" />
         </button>
         {openMenu ? (
-          <nav className="absolute bg-slate-50 left-0 top-0 height w-11/12 h-screen z-10 flex flex-col content-center justify-center">
+          <nav className="overflow-y-auto text-left absolute bg-slate-50 left-0 top-0 height w-11/12 h-screen z-10 flex flex-col justify-start pt-8 px-3">
             <button
               onClick={menuFunction}
               type="button"
@@ -34,7 +77,12 @@ const Header = () => {
               </svg>
             </button>
             <ul>
-              <li className="py-2 text-base">場所別</li>
+              <li className="py-2 text-base">
+                <button type="button" onClick={handleOpenPlace}>
+                  場所別
+                </button>
+                {openPlace ? <ul className="ml-3">{prefectureList}</ul> : undefined}
+              </li>
               <li className="py-2 text-base">メーカーから探す</li>
               <li className="py-2 text-base">Googleアカウントで蝋印</li>
             </ul>
