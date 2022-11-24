@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import PREFECTURE_CITY_DATA from '../../data.json';
 
@@ -6,21 +5,23 @@ const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [openPlace, setOpenPlace] = useState(false);
 
+  const [openCity, setOpenCity] = useState<ObjType>({ 0: false });
+  type ObjType = {
+    [key: string]: boolean;
+  };
+
   const menuFunction = () => {
     setOpenMenu(!openMenu);
   };
   const handleOpenPlace = () => {
     setOpenPlace(!openPlace);
   };
-  const handlePrefectureOpen = (prefectureObject: any, e: any) => {
-    // setOpenPrefecture((prevState) => ({
-    //   ...prevState,
-    console.log(prefectureObject);
-    console.log(e.currentTarget.getAttribute('data-id'));
-    //   [index]: !prevState,
-    // }));
+  const handlePrefectureOpen = (id: number) => {
+    setOpenCity((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
   };
-
   const prefectureList = PREFECTURE_CITY_DATA.map((prefectureObject, index) => {
     const prefectureName = prefectureObject.name;
     const cityInfoObj = prefectureObject.city;
@@ -36,15 +37,10 @@ const Header = () => {
 
     return (
       <>
-        <button
-          type="button"
-          onClick={(e) => handlePrefectureOpen(prefectureObject, e)}
-          className="block"
-          data-id={index}
-        >
+        <button type="button" onClick={() => handlePrefectureOpen(index)} className="block" data-id={index}>
           {prefectureName}
         </button>
-        <ul className="ml-5">{city}</ul>
+        {openCity[index] ? <ul className="ml-5">{city}</ul> : undefined}
       </>
     );
   });

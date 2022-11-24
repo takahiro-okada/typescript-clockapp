@@ -5,8 +5,8 @@ import Home from './components/pages/Home';
 import RegisterClock from './components/pages/RegisterClock';
 import UsersAll from './components/pages/UsersAll';
 import RegisterPlace from './components/pages/RegisterPlace';
-import Header from './components/Organisms/Header';
 import Footer from './components/Organisms/Footer';
+import Header from './components/Organisms/Header';
 
 const App = () => (
   <div className="App flex flex-col min-h-screen">
