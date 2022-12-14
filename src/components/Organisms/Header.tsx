@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import PREFECTURE_CITY_DATA from '../../data.json';
+import IconArrowRight from '../Atoms/IconArrowRight';
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
+  const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openPlace, setOpenPlace] = useState(false);
 
-  const [openCity, setOpenCity] = useState<ObjType>({ 0: false });
-  type ObjType = {
-    [key: string]: boolean;
+  const [openCity, setOpenCity] = useState<IsOpenPrefecture>({ 0: false });
+  type IsOpenPrefecture = {
+    [prefectureNum: string]: boolean;
+  };
+
+  const searchBarFunction = () => {
+    setOpenSearchBar(!openSearchBar);
   };
 
   const menuFunction = () => {
@@ -36,12 +42,20 @@ const Header = () => {
     });
 
     return (
-      <>
-        <button type="button" onClick={() => handlePrefectureOpen(index)} className="block" data-id={index}>
+      <div className="p-1">
+        <button type="button" className="inline-block">
           {prefectureName}
         </button>
+        <button
+          type="button"
+          onClick={() => handlePrefectureOpen(index)}
+          data-id={index}
+          className="inline-block ml-3 align-bottom"
+        >
+          <IconArrowRight />
+        </button>
         {openCity[index] ? <ul className="ml-5">{city}</ul> : undefined}
-      </>
+      </div>
     );
   });
 
@@ -53,6 +67,7 @@ const Header = () => {
           <div className="w-8 h-0.5 bg-gray-600" />
           <div className="w-8 h-0.5 bg-gray-600" />
         </button>
+
         {openMenu ? (
           <nav className="overflow-y-auto text-left absolute bg-slate-50 left-0 top-0 height w-11/12 h-screen z-10 flex flex-col justify-start pt-8 px-3">
             <button
@@ -74,26 +89,44 @@ const Header = () => {
             </button>
             <ul>
               <li className="py-2 text-base">
-                <button type="button" onClick={handleOpenPlace}>
+                <a href="/prefecture" className="inline-block">
                   場所別
+                </a>
+                <button type="button" onClick={handleOpenPlace} className="inline-block ml-3 align-bottom">
+                  <IconArrowRight />
                 </button>
                 {openPlace ? <ul className="ml-3">{prefectureList}</ul> : undefined}
               </li>
-              <li className="py-2 text-base">メーカーから探す</li>
-              <li className="py-2 text-base">Googleアカウントで蝋印</li>
+              <li className="py-2 text-base">
+                <a href="/makers">メーカーから探す</a>
+              </li>
+              <li className="py-2 text-base">Googleアカウントでログイン</li>
             </ul>
             <div className="mt-3 text-md">--管理者用--</div>
             <ul>
-              <li className="py-2 text-base">場所を登録する</li>
-              <li className="py-2 text-base">時計を登録する</li>
-              <li className="py-2 text-base">メーカを登録する</li>
-              <li className="py-2 text-base">ユーザー一覧</li>
+              <li className="py-2 text-base">
+                <a href="/register-place">場所を登録する</a>
+              </li>
+              <li className="py-2 text-base">
+                <a href="register-clock">時計を登録する</a>
+              </li>
+              <li className="py-2 text-base">
+                <a href="register-maker">メーカを登録する</a>
+              </li>
+              <li className="py-2 text-base">
+                <a href="users">ユーザー一覧</a>
+              </li>
             </ul>
           </nav>
         ) : undefined}
-        <h1>時計のあるところ</h1>
-        <div className="relative">
-          <button type="submit">
+        {openSearchBar ? undefined : <h1>時計のあるところ</h1>}
+
+        {/* Search Bar */}
+        <div className="relative flex">
+          {openSearchBar ? (
+            <input type="search" className="inline-block ml-5 p-2 text-sm  border-gray-300 rounded-lg bg-gray-50" />
+          ) : undefined}
+          <button className="inline-block ml-2" type="button" onClick={searchBarFunction}>
             <svg
               aria-hidden="true"
               className="w-5 h-5"
