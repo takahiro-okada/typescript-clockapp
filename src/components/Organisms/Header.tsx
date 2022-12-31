@@ -52,7 +52,11 @@ const Header = () => {
           data-id={index}
           className="inline-block ml-3 align-bottom"
         >
-          <IconArrowRight />
+          {openCity[index] ? (
+            <IconArrowRight arrowDirection="rotate-90" />
+          ) : (
+            <IconArrowRight arrowDirection="rotate-90" />
+          )}
         </button>
         {openCity[index] ? <ul className="ml-5">{city}</ul> : undefined}
       </div>
@@ -68,57 +72,65 @@ const Header = () => {
           <div className="w-8 h-0.5 bg-gray-600" />
         </button>
 
-        {openMenu ? (
-          <nav className="overflow-y-auto text-left absolute bg-slate-50 left-0 top-0 height w-11/12 h-screen z-10 flex flex-col justify-start pt-8 px-3">
-            <button
-              onClick={menuFunction}
-              type="button"
-              className="absolute right-0 top-0 bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+        <nav
+          className={
+            openMenu
+              ? 'text-left fixed bg-slate-50 left-0 top-0 w-11/12 h-screen z-10 flex flex-col justify-start pt-8 px-3 ease-linear duration-300'
+              : 'fixed left-[-100%] ease-linear duration-300'
+          }
+        >
+          <button
+            onClick={menuFunction}
+            type="button"
+            className="absolute right-0 top-0 bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+          >
+            <span className="sr-only">Close menu</span>
+            <svg
+              className="h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
             >
-              <span className="sr-only">Close menu</span>
-              <svg
-                className="h-6 w-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <ul>
+            <li className="py-2 text-base">
+              <a href="/prefecture" className="inline-block">
+                場所別
+              </a>
+              <button
+                type="button"
+                onClick={handleOpenPlace}
+                className="inline-block ml-3 align-bottom  ease-linear duration-300"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <ul>
-              <li className="py-2 text-base">
-                <a href="/prefecture" className="inline-block">
-                  場所別
-                </a>
-                <button type="button" onClick={handleOpenPlace} className="inline-block ml-3 align-bottom">
-                  <IconArrowRight />
-                </button>
-                {openPlace ? <ul className="ml-3">{prefectureList}</ul> : undefined}
-              </li>
-              <li className="py-2 text-base">
-                <a href="/makers">メーカーから探す</a>
-              </li>
-              <li className="py-2 text-base">Googleアカウントでログイン</li>
-            </ul>
-            <div className="mt-3 text-md">--管理者用--</div>
-            <ul>
-              <li className="py-2 text-base">
-                <a href="/register-place">場所を登録する</a>
-              </li>
-              <li className="py-2 text-base">
-                <a href="register-clock">時計を登録する</a>
-              </li>
-              <li className="py-2 text-base">
-                <a href="register-maker">メーカを登録する</a>
-              </li>
-              <li className="py-2 text-base">
-                <a href="users">ユーザー一覧</a>
-              </li>
-            </ul>
-          </nav>
-        ) : undefined}
+                <IconArrowRight />
+              </button>
+              {openPlace ? <ul className="ml-3">{prefectureList}</ul> : undefined}
+            </li>
+            <li className="py-2 text-base">
+              <a href="/makers">メーカーから探す</a>
+            </li>
+            <li className="py-2 text-base">Googleアカウントでログイン</li>
+          </ul>
+          <div className="mt-3 text-md">--管理者用--</div>
+          <ul>
+            <li className="py-2 text-base">
+              <a href="/register-place">場所を登録する</a>
+            </li>
+            <li className="py-2 text-base">
+              <a href="register-clock">時計を登録する</a>
+            </li>
+            <li className="py-2 text-base">
+              <a href="register-maker">メーカを登録する</a>
+            </li>
+            <li className="py-2 text-base">
+              <a href="users">ユーザー一覧</a>
+            </li>
+          </ul>
+        </nav>
         {openSearchBar ? undefined : <h1>時計のあるところ</h1>}
 
         {/* Search Bar */}
