@@ -7,12 +7,12 @@ const ClockCard = (props: any) => {
       <a href="http://hoge">
         <h3>パワードーム</h3>
         <div className="">愛知県半田市</div>
-        <div className="">
+        <div className="mt-3">
           <img src={imgUrl} alt="" className="w-full aspect-square rounded-2xl object-contain" />
         </div>
-        <div className="">Small World</div>
-        <div className="text-right">
-          <button type="button" className="w-full ml-auto">
+        <div className="mt-3">Small World</div>
+        <div className="text-right z-10">
+          <button type="button">
             <HeartIcon />
           </button>
         </div>
