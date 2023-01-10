@@ -10,7 +10,6 @@ const MakerList = () => {
       .then((response) => setMakers(response.data))
       .catch((error) => console.log(error));
   }, []);
-  console.log(makers);
 
   return (
     <section className="mt-9 text-left container mx-auto px-3 py-6">
