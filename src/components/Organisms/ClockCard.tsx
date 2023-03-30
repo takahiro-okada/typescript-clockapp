@@ -2,6 +2,7 @@ import { ReactComponent as HeartIcon } from '../../images/icon-heart.svg';
 
 const ClockCard = (props: any) => {
   const { imgUrl } = props;
+
   return (
     <li className="px-4 py-4 shadow-lg shadow-gray-300 rounded-2xl">
       <a href="http://hoge">

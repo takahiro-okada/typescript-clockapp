@@ -6,7 +6,6 @@ const Home = () => (
       <br />
       ある場所を探すことができます
     </p>
-
     <div className="relative mt-8">
       <iframe
         className="mx-auto aspect-video max-w-full"
