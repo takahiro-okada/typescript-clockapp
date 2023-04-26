@@ -1,8 +1,7 @@
 const IconArrowRight = (props: any) => {
   const { arrowDirection } = props;
   console.log(arrowDirection);
-  // const openStyle = `w-6 h-6 ${arrowDirection}`;
-  // const closeStyle = `w-6 h-6 ${arrowDirection}`;
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

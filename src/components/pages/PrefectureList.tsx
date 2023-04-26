@@ -1,10 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
-interface Prefecture {
-  prefectureId: number;
-  prefectureName: string;
-}
+import Prefecture from '../../types/Prefecture';
 
 const url = 'http://localhost:8080/prefectures';
 
@@ -25,7 +21,7 @@ const PrefectureList = () => {
 
   const renderPrefectureListItem = (prefecture: Prefecture) => (
     <li className="mx-2 my-2" key={prefecture.prefectureId}>
-      <a href={prefecture.prefectureName}>{prefecture.prefectureName}</a>
+      <a href={`/prefecture/${prefecture.prefectureEnName}`}>{prefecture.prefectureName}</a>
     </li>
   );
 

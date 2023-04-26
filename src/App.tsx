@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
 import RegisterClock from './components/pages/RegisterClock';
@@ -22,6 +21,7 @@ const App = () => (
         <Route path="/" element={<Home />} />
         <Route path="/prefecture" element={<PrefectureList />} />
         <Route path="/prefecture/:prefecturename" element={<CityList />} />
+        <Route path="/prefecture/:prefecturename/:cityname" element={<ClockPlace />} />
         <Route path="/makers/" element={<MakerList />} />
         <Route path="/makers/:makername" element={<MakerDetails />} />
         <Route path="/makers/:makername/:clockname" element={<ClockPlace />} />
