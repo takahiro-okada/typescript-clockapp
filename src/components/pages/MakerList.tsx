@@ -1,13 +1,16 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import MakerAndCategoryCard from '../Organisms/MakerAndCategoryCard';
+import MakerCard from '../Organisms/MakerCard';
 
 const MakerList = () => {
   const [makers, setMakers] = useState([]);
   useEffect(() => {
     axios
-      .get('http://localhost:8080/maker')
-      .then((response) => setMakers(response.data))
+      .get('http://localhost:8080/makers')
+      .then((response) => {
+        console.log(response.data);
+        setMakers(response.data);
+      })
       .catch((error) => console.log(error));
   }, []);
 
@@ -16,7 +19,7 @@ const MakerList = () => {
       <h2 className="font-bold text-3xl">時計のメーカーリスト</h2>
       <ul className="mt-6 grid grid-cols-2 gap-5">
         {makers.map((maker) => (
-          <MakerAndCategoryCard maker={maker} imgUrl="/logo-citizen.png" />
+          <MakerCard maker={maker} />
         ))}
       </ul>
     </section>

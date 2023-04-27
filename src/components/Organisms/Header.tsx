@@ -118,7 +118,8 @@ const Header = () => {
           <div className="mt-3 text-md">--管理者用--</div>
           <ul>
             <li className="py-2 text-base">
-              <a href="/register-place">場所を登録する</a>
+              絶対URLにできる
+              <a href="./register-place">場所を登録する</a>
             </li>
             <li className="py-2 text-base">
               <a href="register-clock">時計を登録する</a>
