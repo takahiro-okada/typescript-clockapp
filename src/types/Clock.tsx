@@ -1,11 +1,12 @@
 interface Clock {
-  clockId: number;
-  clockName: string;
-  address: string;
+  clock_id: number;
+  clock_name: string;
+  description: string;
+  clock_image: string;
   latitude: number;
   longitude: number;
-  description: string;
-  cityId: number;
+  maker_id: number;
+  user_id: number;
 }
 
 export default Clock;
