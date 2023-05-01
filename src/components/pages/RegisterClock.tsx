@@ -59,7 +59,7 @@ const RegisterClock = () => {
   };
 
   return (
-    <section className="mt-9 text-left container mx-auto px-3 py-6">
+    <section className="mt-9 text-left max-w-screen-md mx-auto px-3 py-6">
       <h2 className="font-bold text-3xl">時計を登録する</h2>
       <form onSubmit={submitForm}>
         <label htmlFor="maker" className="text-xl mt-5 block">

@@ -1,22 +1,35 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as HeartIcon } from '../../images/icon-heart.svg';
+import usePrefectureFromLatLng from '../../hooks/usePrefectureFromLatLng';
 
 const ClockCard = (props: any) => {
   const { clock } = props;
+  const prefecture = usePrefectureFromLatLng(clock.latitude, clock.longitude);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/', { state: { selectedClock: { lat: clock.latitude, lng: clock.longitude } } });
+  };
 
   return (
-    <li className="px-4 py-4 shadow-lg shadow-gray-300 rounded-2xl">
-      <a href="http://hoge">
-        <div className="">{clock.address}</div>
-        <div className="mt-3">
-          <img src="" alt="" className="w-full aspect-square rounded-2xl object-contain" />
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <li className="bg-white rounded-lg shadow-lg" onClick={handleClick}>
+      <div className="relative">
+        <img
+          src={`http://localhost:8080/uploads/${clock.imagePath.split('/').pop()}`}
+          alt="スモールワールド"
+          className="w-full aspect-square rounded-t-lg object-cover"
+        />
+        <div className="absolute top-2 right-2">
+          <HeartIcon />
         </div>
-        <div className="mt-3">{clock.clockName}</div>
-        <div className="text-right z-10">
-          <button type="button">
-            <HeartIcon />
-          </button>
-        </div>
-      </a>
+      </div>
+      <div className="p-4">
+        <h3 className="text-xl font-extrabold">{clock.name}</h3>
+        <p className="mt-2 text-gray-500">{clock.description}</p>
+        {prefecture && <p className="mt-2 text-gray-500">{prefecture}</p>}
+      </div>
     </li>
   );
 };

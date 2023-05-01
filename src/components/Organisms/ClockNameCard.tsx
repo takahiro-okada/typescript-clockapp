@@ -1,6 +1,5 @@
 const ClockNameCard = (props: any) => {
   const { maker, imgUrl } = props;
-  console.log(maker);
 
   const url = `/makers/${maker.makerName}`;
   return (

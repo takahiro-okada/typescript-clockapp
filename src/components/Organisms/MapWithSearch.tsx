@@ -3,7 +3,6 @@ import { GoogleMap, LoadScript } from '@react-google-maps/api';
 
 interface MapWithSearchProps {
   apiKey: string;
-  // eslint-disable-next-line react/no-unused-prop-types
   onPlaceSelected: (place: google.maps.places.PlaceResult) => void;
 }
 const MapWithSearch: React.FC<MapWithSearchProps> = ({ apiKey, onPlaceSelected }) => {
@@ -28,11 +27,9 @@ const MapWithSearch: React.FC<MapWithSearchProps> = ({ apiKey, onPlaceSelected }
           return;
         }
         console.log('Place found');
-        console.log(place);
         setSelectedPlace(place);
-        onPlaceSelected(place); // <- 追加: 親コンポーネントの関数を呼び出す
+        onPlaceSelected(place);
 
-        // onConfirmButtonClick関数の処理をここに移動
         if (map && place.geometry && place.geometry.location) {
           map.panTo(place.geometry.location);
           map.setZoom(15);
@@ -71,7 +68,7 @@ const MapWithSearch: React.FC<MapWithSearchProps> = ({ apiKey, onPlaceSelected }
         <GoogleMap
           onLoad={(mapInstance: google.maps.Map) => setMap(mapInstance)}
           mapContainerStyle={{ width: '100%', height: '400px' }}
-          center={{ lat: 35.6895, lng: 139.6917 }} // 東京都庁の緯度経度
+          center={{ lat: 35.6895, lng: 139.6917 }}
           zoom={10}
         />
       </LoadScript>

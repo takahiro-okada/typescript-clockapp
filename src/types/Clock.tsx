@@ -1,8 +1,8 @@
 interface Clock {
   clock_id: number;
-  clock_name: string;
+  name: string;
   description: string;
-  clock_image: string;
+  imagePath: string;
   latitude: number;
   longitude: number;
   maker_id: number;
